@@ -95,7 +95,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Plot各Farmer分布",
+      "title": "Plot各Harvester分布",
       "type": "bargauge"
     },
     {
@@ -500,7 +500,7 @@
           "refId": "A"
         }
       ],
-      "title": "各Farmer验证挑战数量 （5分钟）",
+      "title": "各Harvester验证挑战数量 （5分钟）",
       "type": "bargauge"
     },
     {
