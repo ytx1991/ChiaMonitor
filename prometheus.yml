@@ -14,15 +14,15 @@ scrape_configs:
 
   - job_name: 'chia'
     static_configs:
-      - targets: ['ip-172-31-50-149.us-west-2.compute.internal:3903']
+      - targets: ['YOUR_HARVESTER_IP1:3903']
         labels:
-          host: Farmer1
-      - targets: ['ip-172-31-23-251.us-west-2.compute.internal:3903']
+          host: Harvester1
+      - targets: ['YOUR_HARVESTER_IP1:3903']
         labels:
-          host: Farmer2
-      - targets: ['ip-172-31-9-216.us-west-2.compute.internal:3903']
+          host: Harvester2
+      - targets: ['YOUR_HARVESTER_IP1:3903']
         labels:
-          host: Farmer3
-      - targets: ['ip-172-31-32-169.us-west-2.compute.internal:3903']
+          host: Harvester3
+      - targets: ['YOUR_HARVESTER_IP1:3903']
         labels:
-          host: Farmer4
+          host: Harvester4
