@@ -1,0 +1,28 @@
+global:
+  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'chia'
+    static_configs:
+      - targets: ['ip-172-31-50-149.us-west-2.compute.internal:3903']
+        labels:
+          host: Farmer1
+      - targets: ['ip-172-31-23-251.us-west-2.compute.internal:3903']
+        labels:
+          host: Farmer2
+      - targets: ['ip-172-31-9-216.us-west-2.compute.internal:3903']
+        labels:
+          host: Farmer3
+      - targets: ['ip-172-31-32-169.us-west-2.compute.internal:3903']
+        labels:
+          host: Farmer4
