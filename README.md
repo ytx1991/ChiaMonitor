@@ -3,7 +3,7 @@ This is a Chia monitoring solution for people who need to run multiple harvester
 It is based on the [Grafana](https://grafana.com/docs/grafana/latest/installation/) (Data Visualization), [Prometheus](https://prometheus.io/docs/prometheus/latest/installation/) (Data Persistence & Query) and Mtail (binary file included, Data Collector).
 
 ## Features
-Check the following screenshot. It provides many useful info and you can set your plot size (K32 by defaul) and Netspace Unit (It is increasing so fast!)
+Check the following screenshot. It provides many useful info and you can set your plot size (K32 by default) and Netspace Unit (It is increasing so fast!)
 ![Screenshot of the dashboard](/screenshot.PNG "Screenshot of the dashboards")
 
 ## How to Setup
