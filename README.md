@@ -19,7 +19,7 @@ Copy `prometheus.yml` to your Prometheus path and run Grafana & Prometheus.
 ### On the harvestor hosts
 Check out the repo on your hosts and run `./run_mtail.sh`. That's it.
 
-Note: if your Chia is not install in `~/` (home directory) you need to modify `run_mtail.sh` with your Chia install path.
+Note: if your Chia is not install in `~/` (home directory) you need to modify `run_mtail.sh` with your Chia install path. Make sure all the run_mtail.sh and mtail have execution permission (use chmod command). The mtail version has to be 3.0.0 rc45.
 
 ### Import Dashboard in Grafana
 I made both English (`grafana_dashboard_en.json`) and Chinese (`grafana_dashboard_zh.json`) versions of the dashboard. You can import them in Grafana.
