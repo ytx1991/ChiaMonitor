@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 3,
-  "iteration": 1619542165857,
+  "iteration": 1620154689898,
   "links": [],
   "panels": [
     {
@@ -445,6 +445,64 @@
     },
     {
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 20
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 5,
+        "x": 0,
+        "y": 10
+      },
+      "id": 28,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "7.5.4",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "(rate(eligible_plots[5m])*300)/(rate(number_of_challenges[5m])*300)*100",
+          "interval": "",
+          "legendFormat": "{{host}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Passed Filter % on each Harvester",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -472,8 +530,8 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 11,
-        "x": 0,
+        "w": 3,
+        "x": 5,
         "y": 10
       },
       "id": 14,
@@ -501,6 +559,63 @@
         }
       ],
       "title": "Challenges on each Harvester (5min)",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 3,
+        "x": 8,
+        "y": 10
+      },
+      "id": 30,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "7.5.4",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "proofs_found",
+          "interval": "",
+          "legendFormat": "{{host}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Wins on each Harvester",
       "type": "bargauge"
     },
     {
@@ -569,7 +684,7 @@
           "expr": "sum(proofs_found) / sum(number_of_challenges) * 100",
           "hide": false,
           "interval": "",
-          "legendFormat": "Overall Win Chance",
+          "legendFormat": "Experimental Win Rate",
           "refId": "C"
         }
       ],
@@ -930,5 +1045,5 @@
   "timezone": "",
   "title": "Chia Copy",
   "uid": "yzJeuc9Mz",
-  "version": 2
+  "version": 4
 }
