@@ -34,4 +34,4 @@ Import Dashboard JSON
 ![Screenshot of the import](/import.PNG "Screenshot of the import")
 
 You are all set! Enjoy and give a star if you like this!
-
+Donate xch1adq8a7r5e2qkeyxgw0pml735efnsqaqk4uyyj926e4h0zg28faqsufq0k4
