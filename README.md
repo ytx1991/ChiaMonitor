@@ -4,6 +4,8 @@ It is based on [Grafana](https://grafana.com/docs/grafana/latest/installation/) 
 
 All these components support most popular OS such as Linux/Windows/MacOS.
 
+中文用户可以参考视频：https://www.bilibili.com/video/BV1sQ4y1R741/
+
 ## Features
 Check the following screenshot. It provides many useful numbers, and you can set your plot size (`K32` by default) and Netspace Unit (It is increasing so fast!)
 ![Screenshot of the dashboard](/screenshot.PNG "Screenshot of the dashboard")
