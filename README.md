@@ -28,7 +28,9 @@ For Windows, the default path looks like: C:\Users\YOUR_USER_NAME\AppData\Local\
 
 6. Open http://localhost:3903 you should see a primitive mtail website.
 
-Note: Mtail needs some time to read through your log. If you want to speed up, try to delete the current debug.log.
+Note:
+* `This requires you enabled Chia INFO level log.`
+* `Mtail needs some time to read through your log. If you want to speed up, try to delete the current debug.log.`
 
 ### Install Prometheus on the main host
 1. Add Prometheus default port 9090 to your inbound firewall rule
@@ -56,7 +58,7 @@ Note: Mtail needs some time to read through your log. If you want to speed up, t
 
 4. Use web browser open http://localhost:3000, you will see the Grafana portal
 
-5. Create a new password for the admin
+5. Create a new password for the admin (default username/password = admin/admin)
 
 6. Create a new data source named as Chia, check the screenshot.
 ![Screenshot of the datasource](/datasource.PNG "Screenshot of the datasource")
