@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1620091962410,
+  "iteration": 1621445401881,
   "links": [],
   "panels": [
     {
@@ -148,7 +148,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "9216/sum(network_space)/$network_space_unit/1024*$plot_size*sum(total_plots)",
+          "expr": "9216/max(network_space)/$network_space_unit/1024*$plot_size*sum(total_plots)",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -204,7 +204,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "xch_count",
+          "expr": "max(xch_count)",
           "hide": false,
           "interval": "",
           "legendFormat": "挖到的XCH",
@@ -266,7 +266,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "24/(9216/sum(network_space)/$network_space_unit/1024*$plot_size*sum(total_plots))*2",
+          "expr": "24/(9216/max(network_space)/$network_space_unit/1024*$plot_size*sum(total_plots))*2",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -379,7 +379,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "network_space",
+          "expr": "max(network_space)",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -434,7 +434,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "last_farm_height",
+          "expr": "max(last_farm_height)",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -902,7 +902,7 @@
           "exemplar": true,
           "expr": "histogram_quantile(0.50, sum(rate(check_duration_bucket[5m])) by (le))",
           "interval": "",
-          "legendFormat": "Average Check Duration",
+          "legendFormat": "平均查询时间",
           "refId": "A"
         },
         {
@@ -910,7 +910,7 @@
           "expr": "histogram_quantile(0.95, sum(rate(check_duration_bucket[5m])) by (le))",
           "hide": false,
           "interval": "",
-          "legendFormat": "95th Percentile Check Duration",
+          "legendFormat": "P95 查询时间",
           "refId": "B"
         }
       ],
@@ -1043,5 +1043,5 @@
   "timezone": "",
   "title": "Chia",
   "uid": "Chia",
-  "version": 13
+  "version": 15
 }
