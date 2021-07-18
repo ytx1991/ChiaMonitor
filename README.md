@@ -26,9 +26,11 @@ In short, you need to install Grafana & Prometheus on your full node farmer host
 For Linux, it should be /your/path/to/chia-blockchain
 For Windows, the default path looks like: C:\Users\YOUR_USER_NAME\AppData\Local\chia-blockchain\app-1.1.5
 
-5. Run `./run_mtail.sh` (Linux) / `./run_mtail.bat`  IN the data_collect folder (Windows needs to keep the two pop-up windows open).
+5. Modify the wallet fingerprint in the run_mtail.sh / farmer_summary.bat !!!
 
-6. Open http://localhost:3903 you should see a primitive mtail website.
+6. Run `./run_mtail.sh` (Linux) / `./run_mtail.bat`  IN the data_collect folder (Windows needs to keep the two pop-up windows open).
+
+7. Open http://localhost:3903 you should see a primitive mtail website.
 
 Note:
 * `This requires you enabled Chia INFO level log.`

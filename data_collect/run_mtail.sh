@@ -1,4 +1,12 @@
 # ~/.chia/mainnet/log/ is where your Chia logs saved.
 # Replace them if they are different on your host
+fingerprint=Your_Wallet_Fingerprint
+pkill -9 farmer_summary
+pkill -9 wallet
+pkill -9 nft
+chmod +x merge.sh
 nohup watch -n 30 "../venv/bin/chia farm summary > farmer_summary.log" &
-nohup ./mtail --progs ./ --logs ~/.chia/mainnet/log/debug.log --logs ./farmer_summary.log --poll_interval 3000ms &
+nohup watch -n 30 "../venv/bin/chia wallet show -f $fingerprint > wallet.log && grep  ' ' wallet.log | tr '\n' ' ' > one_line_wallet.log" &
+nohup watch -n 30 "../venv/bin/chia plotnft show -f $fingerprint > nft.log && awk -v RS=Wallet '{print > ("nft-" NR ".log")}' nft.log " &
+nohup watch -n 30 "./merge.sh" &
+nohup ./mtail --progs ./ --logs ~/.chia/mainnet/log/debug.log --logs ./"*.log" --poll_interval 1000ms &

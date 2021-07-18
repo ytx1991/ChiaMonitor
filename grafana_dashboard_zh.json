@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1621445401881,
+  "iteration": 1625884425214,
   "links": [],
   "panels": [
     {
@@ -80,7 +80,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "exemplar": true,
@@ -100,22 +100,28 @@
     },
     {
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "green",
                 "value": null
               },
               {
+                "color": "#EAB839",
+                "value": 150
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 250
               }
             ]
           }
@@ -128,11 +134,9 @@
         "x": 5,
         "y": 1
       },
-      "id": 22,
+      "id": 29,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
+        "displayMode": "gradient",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -141,29 +145,34 @@
           "fields": "",
           "values": false
         },
-        "text": {},
-        "textMode": "auto"
+        "showUnfilled": true,
+        "text": {}
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "exemplar": true,
-          "expr": "9216/max(network_space)/$network_space_unit/1024*$plot_size*sum(total_plots)",
+          "expr": "total_plots-(total_plots offset 1d)",
+          "hide": false,
           "interval": "",
-          "legendFormat": "",
-          "refId": "A"
+          "legendFormat": "{{host}}",
+          "refId": "B"
         }
       ],
-      "title": "每日期望收益 (个)",
-      "type": "stat"
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "每日新增Plot",
+      "type": "bargauge"
     },
     {
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 6,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -200,18 +209,77 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "exemplar": true,
-          "expr": "max(xch_count)",
+          "expr": "max(balance)",
           "hide": false,
           "interval": "",
-          "legendFormat": "挖到的XCH",
+          "legendFormat": "账户余额",
           "refId": "B"
         }
       ],
-      "title": "挖到的XCH",
+      "title": "账户余额",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 3,
+        "x": 11,
+        "y": 1
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.6",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "9216/sum(max(network_space))/$network_space_unit/1024*$plot_size*sum(total_plots)",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "每日期望收益 (个)",
       "type": "stat"
     },
     {
@@ -243,7 +311,7 @@
       "gridPos": {
         "h": 9,
         "w": 3,
-        "x": 11,
+        "x": 14,
         "y": 1
       },
       "id": 24,
@@ -262,11 +330,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "exemplar": true,
-          "expr": "24/(9216/max(network_space)/$network_space_unit/1024*$plot_size*sum(total_plots))*2",
+          "expr": "24/(9216/sum(max(network_space))/$network_space_unit/1024*$plot_size*sum(total_plots))*2",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -299,7 +367,7 @@
       "gridPos": {
         "h": 9,
         "w": 3,
-        "x": 14,
+        "x": 17,
         "y": 1
       },
       "id": 26,
@@ -318,7 +386,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "exemplar": true,
@@ -356,7 +424,7 @@
       "gridPos": {
         "h": 9,
         "w": 3,
-        "x": 17,
+        "x": 20,
         "y": 1
       },
       "id": 18,
@@ -375,7 +443,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "exemplar": true,
@@ -389,59 +457,309 @@
       "type": "stat"
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
+          "unit": "short"
         },
         "overrides": []
       },
+      "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
-        "h": 9,
-        "w": 2,
-        "x": 20,
-        "y": 1
+        "h": 7,
+        "w": 5,
+        "x": 0,
+        "y": 10
       },
-      "id": 20,
+      "hiddenSeries": false,
+      "id": 31,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
+        "alertThreshold": true
       },
-      "pluginVersion": "7.5.4",
+      "percentage": false,
+      "pluginVersion": "7.5.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
       "targets": [
         {
           "exemplar": true,
-          "expr": "max(last_farm_height)",
+          "expr": "point",
+          "interval": "",
+          "legendFormat": "{{launchID}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "矿池贡献点数",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [],
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:118",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:119",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 5,
+        "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 32,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "difficulty",
+          "interval": "",
+          "legendFormat": "{{launchID}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "矿池难度",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [],
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:118",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:119",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 11,
+        "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 33,
+      "interval": "1d",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "maxDataPoints": 30,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "delta(balance[1d])",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "Farm高度",
-      "type": "stat"
+      "thresholds": [],
+      "timeFrom": "now-30d",
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "过去30天收益",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [],
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:118",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:119",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "datasource": null,
@@ -469,10 +787,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 7,
         "w": 5,
         "x": 0,
-        "y": 10
+        "y": 17
       },
       "id": 28,
       "options": {
@@ -488,11 +806,11 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "exemplar": true,
-          "expr": "(rate(eligible_plots[5m])*300)/(rate(number_of_challenges[5m])*300)*100",
+          "expr": "eligible_plots / number_of_challenges * 100",
           "interval": "",
           "legendFormat": "{{host}}",
           "refId": "A"
@@ -529,10 +847,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 3,
+        "h": 7,
+        "w": 6,
         "x": 5,
-        "y": 10
+        "y": 17
       },
       "id": 14,
       "options": {
@@ -548,7 +866,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "exemplar": true,
@@ -575,63 +893,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 3,
-        "x": 8,
-        "y": 10
-      },
-      "id": 30,
-      "options": {
-        "displayMode": "gradient",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "text": {}
-      },
-      "pluginVersion": "7.5.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "proofs_found",
-          "interval": "",
-          "legendFormat": "{{host}}",
-          "refId": "A"
-        }
-      ],
-      "title": "各Harvester爆块统计",
-      "type": "bargauge"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
               }
             ]
           },
@@ -640,10 +901,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 8,
+        "h": 7,
+        "w": 12,
         "x": 11,
-        "y": 10
+        "y": 17
       },
       "id": 12,
       "options": {
@@ -661,7 +922,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "exemplar": true,
@@ -683,81 +944,12 @@
           "expr": "sum(proofs_found) / sum(number_of_challenges) * 100",
           "hide": false,
           "interval": "",
-          "legendFormat": "总爆块率",
+          "legendFormat": "验证成功率",
           "refId": "C"
         }
       ],
       "title": "概率统计 %",
       "type": "stat"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 3,
-        "x": 19,
-        "y": 10
-      },
-      "id": 6,
-      "options": {
-        "displayMode": "gradient",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "text": {}
-      },
-      "pluginVersion": "7.5.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(number_of_challenges)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "已查询挑战",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(eligible_plots)\n",
-          "interval": "",
-          "legendFormat": "通过初筛",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(proofs_found)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "爆块",
-          "refId": "B"
-        }
-      ],
-      "title": "挑战验证累计",
-      "type": "bargauge"
     },
     {
       "aliasColors": {},
@@ -775,7 +967,7 @@
         "h": 10,
         "w": 11,
         "x": 0,
-        "y": 19
+        "y": 24
       },
       "hiddenSeries": false,
       "id": 4,
@@ -795,7 +987,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.6",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -867,9 +1059,9 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 10,
-        "w": 11,
+        "w": 12,
         "x": 11,
-        "y": 19
+        "y": 24
       },
       "hiddenSeries": false,
       "id": 8,
@@ -889,7 +1081,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "7.5.6",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -902,7 +1094,7 @@
           "exemplar": true,
           "expr": "histogram_quantile(0.50, sum(rate(check_duration_bucket[5m])) by (le))",
           "interval": "",
-          "legendFormat": "平均查询时间",
+          "legendFormat": "Average Check Duration",
           "refId": "A"
         },
         {
@@ -910,7 +1102,7 @@
           "expr": "histogram_quantile(0.95, sum(rate(check_duration_bucket[5m])) by (le))",
           "hide": false,
           "interval": "",
-          "legendFormat": "P95 查询时间",
+          "legendFormat": "95th Percentile Check Duration",
           "refId": "B"
         }
       ],
@@ -1007,8 +1199,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "Pib",
-          "value": "1024"
+          "text": "Eib",
+          "value": "1048576"
         },
         "description": null,
         "error": null,
@@ -1019,12 +1211,12 @@
         "name": "network_space_unit",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "Pib",
             "value": "1024"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "Eib",
             "value": "1048576"
           }
@@ -1036,12 +1228,12 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Chia",
   "uid": "Chia",
-  "version": 15
+  "version": 7
 }

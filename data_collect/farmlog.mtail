@@ -1,8 +1,15 @@
 gauge network_space
 gauge xch_count
 gauge last_farm_height
-/^Total chia farmed: (?P<xch_count>[\d\.]+).*$/ {
-    xch_count = $xch_count
+gauge balance
+gauge point by launchID
+gauge difficulty by launchID
+/^.*Wallet ID 1 type STANDARD_WALLET Chia Wallet    -Total Balance: (?P<balance>[\d\.]+) xch.*$/ {
+    balance = $balance
+}
+/^.*Launcher ID: (?P<launchID>.+) Target address.*Current pool URL: (?P<pool>.+) Current difficulty: (?P<difficulty>\d+) Points balance: (?P<point>\d+).*$/ {
+    point[$launchID] = $point
+    difficulty[$launchID] = $difficulty
 }
 /^Last height farmed: (?P<last_farm_height>\d+).*$/ {
     last_farm_height = $last_farm_height
@@ -10,5 +17,7 @@ gauge last_farm_height
 /^Estimated network space: (?P<network_space>[\d\.]+).*$/ {
     network_space = $network_space
 }
-
+/^Total chia farmed: (?P<xch_count>[\d\.]+).*$/ {
+    xch_count = $xch_count
+}
 
