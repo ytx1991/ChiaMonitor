@@ -4,7 +4,7 @@ gauge last_farm_height
 gauge balance
 gauge point by launchID
 gauge difficulty by launchID
-/^.*Wallet ID 1 type STANDARD_WALLET Chia Wallet    -Total Balance: (?P<balance>[\d\.]+) xch.*$/ {
+/^.*Chia Wallet:    -Total Balance:         (?P<balance>[\d\.]+) xch.*$/ {
     balance = $balance
 }
 /^.*Launcher ID: (?P<launchID>.+) Target address.*Current pool URL: (?P<pool>.+) Current difficulty: (?P<difficulty>\d+) Points balance: (?P<point>\d+).*$/ {
