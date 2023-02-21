@@ -8,6 +8,7 @@ gauge difficulty by launchID
 gauge plot_count by ip
 gauge bad_plots by ip
 gauge plot_size by ip
+
 /^.*Chia Wallet:    -Total Balance:         (?P<balance>[\d\.]+) xch.*$/ {
     balance = $balance
 }
