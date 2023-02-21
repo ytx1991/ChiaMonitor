@@ -1,16 +1,26 @@
 gauge network_space
 gauge xch_count
+gauge total_space
 gauge last_farm_height
 gauge balance
 gauge point by launchID
 gauge difficulty by launchID
-/^.*Wallet ID 1 type STANDARD_WALLET Chia Wallet    -Total Balance: (?P<balance>[\d\.]+) xch.*$/ {
+gauge plot_count by ip
+gauge bad_plots by ip
+gauge plot_size by ip
+/^.*Chia Wallet:    -Total Balance:         (?P<balance>[\d\.]+) xch.*$/ {
     balance = $balance
 }
 /^.*Launcher ID: (?P<launchID>.+) Target address.*Current pool URL: (?P<pool>.+) Current difficulty: (?P<difficulty>\d+) Points balance: (?P<point>\d+).*$/ {
     point[$launchID] = $point
     difficulty[$launchID] = $difficulty
 }
+/^.*'host': '(?P<ip>.+)', 'node.*'failed_to_open_filenames': (?P<bad_plots>\d+),.*'plots': (?P<plot_count>\d+),.*'total_plot_size': (?P<plot_size>\d+).*$/ {
+    bad_plots[$ip] = $bad_plots
+    plot_count[$ip] = $plot_count
+    plot_size[$ip] = $plot_size
+}
+
 /^Last height farmed: (?P<last_farm_height>\d+).*$/ {
     last_farm_height = $last_farm_height
 }
@@ -19,5 +29,8 @@ gauge difficulty by launchID
 }
 /^Total chia farmed: (?P<xch_count>[\d\.]+).*$/ {
     xch_count = $xch_count
+}
+/^Total size of plots: (?P<total_space>[\d\.]+).*$/ {
+    total_space = $total_space
 }
 

@@ -5,6 +5,7 @@ counter number_of_challenges
 gauge total_plots
 counter eligible_plots
 counter proofs_found
+counter dev_fee
 histogram check_duration buckets 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 10
 /^(?P<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d+) harvester chia.harvester.harvester: \w+\s+ (?P<eligible_plots>\d+) plots were eligible for farming \w+\.\.\. Found (?P<proofs>\d+) proofs\. Time: (?P<search_time>[\d\.]+) s\. Total (?P<total_plots>\d+) plots.*$/ {
     strptime($timestamp, "2006-01-02T15:04:05")
@@ -13,4 +14,7 @@ histogram check_duration buckets 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 10
     eligible_plots += $eligible_plots
     proofs_found += $proofs
     check_duration = $search_time
+}
+/^.*Used farmer reward of block.*$/ {
+    dev_fee++
 }

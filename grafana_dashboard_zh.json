@@ -13,14 +13,14 @@
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1625884425214,
+  "iteration": 1676915816756,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
-      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -32,7 +32,75 @@
       "type": "row"
     },
     {
-      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 150
+              },
+              {
+                "color": "red",
+                "value": 250
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "AsG0gLo7k"
+          },
+          "exemplar": true,
+          "expr": "plot_count",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{ip}}",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "各Harvester Plot分布",
+      "type": "bargauge"
+    },
+    {
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -63,10 +131,10 @@
       "gridPos": {
         "h": 9,
         "w": 5,
-        "x": 0,
+        "x": 4,
         "y": 1
       },
-      "id": 2,
+      "id": 35,
       "options": {
         "displayMode": "gradient",
         "orientation": "auto",
@@ -80,26 +148,27 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.3.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "AsG0gLo7k"
+          },
           "exemplar": true,
-          "expr": "total_plots",
+          "expr": "bad_plots",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{host}}",
+          "legendFormat": "{{ip}}",
           "queryType": "randomWalk",
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "各Harvester Plot分布",
+      "title": "无效的Plot",
       "type": "bargauge"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -130,8 +199,8 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 3,
-        "x": 5,
+        "w": 5,
+        "x": 9,
         "y": 1
       },
       "id": 29,
@@ -148,29 +217,58 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.3.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "AsG0gLo7k"
+          },
           "exemplar": true,
-          "expr": "total_plots-(total_plots offset 1d)",
+          "expr": "delta(plot_count[1d])",
           "hide": false,
           "interval": "",
-          "legendFormat": "{{host}}",
+          "legendFormat": "{{ip}}",
           "refId": "B"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "每日新增Plot",
       "type": "bargauge"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "decimals": 6,
           "mappings": [],
@@ -189,27 +287,22 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 3,
-        "x": 8,
+        "w": 8,
+        "x": 14,
         "y": 1
       },
       "id": 16,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
         },
-        "text": {},
-        "textMode": "auto"
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -221,10 +314,117 @@
         }
       ],
       "title": "账户余额",
-      "type": "stat"
+      "type": "timeseries"
     },
     {
-      "datasource": null,
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 22,
+        "x": 0,
+        "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 33,
+      "interval": "1d",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "maxDataPoints": 30,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.3.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "AsG0gLo7k"
+          },
+          "exemplar": true,
+          "expr": "delta(balance[1d])",
+          "interval": "",
+          "legendFormat": "收益",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "AsG0gLo7k"
+          },
+          "exemplar": true,
+          "expr": "delta(dev_fee[1d])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Gigahorse收费",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": "now-15d",
+      "timeRegions": [],
+      "title": "过去15天收益",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [],
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:118",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:119",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -249,9 +449,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 3,
-        "x": 11,
-        "y": 1
+        "w": 5,
+        "x": 0,
+        "y": 19
       },
       "id": 22,
       "options": {
@@ -269,11 +469,15 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.3.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "AsG0gLo7k"
+          },
           "exemplar": true,
-          "expr": "9216/sum(max(network_space))/$network_space_unit/1024*$plot_size*sum(total_plots)",
+          "expr": "9216/(network_space * $network_space_unit)  * total_space * $personal_space_unit",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -283,7 +487,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -310,9 +513,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 3,
-        "x": 14,
-        "y": 1
+        "w": 6,
+        "x": 5,
+        "y": 19
       },
       "id": 24,
       "options": {
@@ -330,11 +533,15 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.3.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "AsG0gLo7k"
+          },
           "exemplar": true,
-          "expr": "24/(9216/sum(max(network_space))/$network_space_unit/1024*$plot_size*sum(total_plots))*2",
+          "expr": "24/(9216/(network_space * $network_space_unit)  * total_space * $personal_space_unit) * 2 ",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -344,7 +551,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -360,17 +566,18 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unit": "tbytes"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 9,
-        "w": 3,
-        "x": 17,
-        "y": 1
+        "w": 5,
+        "x": 11,
+        "y": 19
       },
-      "id": 26,
+      "id": 38,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -386,21 +593,24 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.3.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "AsG0gLo7k"
+          },
           "exemplar": true,
-          "expr": "sum(total_plots) * $plot_size / 1024",
+          "expr": "total_space * $personal_space_unit",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "个人总算力（Tib）",
+      "title": "个人总算力",
       "type": "stat"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -417,15 +627,15 @@
               }
             ]
           },
-          "unit": "none"
+          "unit": "tbytes"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 9,
-        "w": 3,
-        "x": 20,
-        "y": 1
+        "w": 6,
+        "x": 16,
+        "y": 19
       },
       "id": 18,
       "options": {
@@ -443,11 +653,15 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.3.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "AsG0gLo7k"
+          },
           "exemplar": true,
-          "expr": "max(network_space)",
+          "expr": "min(network_space)*$network_space_unit",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -461,7 +675,6 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -475,7 +688,7 @@
         "h": 7,
         "w": 5,
         "x": 0,
-        "y": 10
+        "y": 28
       },
       "hiddenSeries": false,
       "id": 31,
@@ -496,7 +709,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -514,9 +727,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "矿池贡献点数",
       "tooltip": {
         "shared": true,
@@ -526,9 +737,7 @@
       "transformations": [],
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -536,25 +745,18 @@
         {
           "$$hashKey": "object:118",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:119",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -562,7 +764,6 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -576,7 +777,7 @@
         "h": 7,
         "w": 6,
         "x": 5,
-        "y": 10
+        "y": 28
       },
       "hiddenSeries": false,
       "id": 32,
@@ -597,7 +798,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -615,9 +816,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "矿池难度",
       "tooltip": {
         "shared": true,
@@ -627,9 +826,7 @@
       "transformations": [],
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -637,250 +834,21 @@
         {
           "$$hashKey": "object:118",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "$$hashKey": "object:119",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 11,
-        "y": 10
-      },
-      "hiddenSeries": false,
-      "id": 33,
-      "interval": "1d",
-      "legend": {
-        "avg": false,
-        "current": false,
-        "hideZero": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "maxDataPoints": 30,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.6",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "delta(balance[1d])",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": "now-30d",
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "过去30天收益",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transformations": [],
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:118",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:119",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 20
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 5,
-        "x": 0,
-        "y": 17
-      },
-      "id": 28,
-      "options": {
-        "displayMode": "gradient",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "text": {}
-      },
-      "pluginVersion": "7.5.6",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "eligible_plots / number_of_challenges * 100",
-          "interval": "",
-          "legendFormat": "{{host}}",
-          "refId": "A"
-        }
-      ],
-      "title": "各Harvester初筛通过率",
-      "type": "bargauge"
-    },
-    {
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "semi-dark-red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 0
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 5,
-        "y": 17
-      },
-      "id": 14,
-      "options": {
-        "displayMode": "gradient",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "text": {}
-      },
-      "pluginVersion": "7.5.6",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "rate(number_of_challenges[5m])*300",
-          "interval": "",
-          "legendFormat": "{{host}}",
-          "refId": "A"
-        }
-      ],
-      "title": "各Harvester验证挑战数量 （5分钟）",
-      "type": "bargauge"
-    },
-    {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -902,9 +870,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 12,
+        "w": 11,
         "x": 11,
-        "y": 17
+        "y": 28
       },
       "id": 12,
       "options": {
@@ -922,7 +890,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.3.3",
       "targets": [
         {
           "exemplar": true,
@@ -952,22 +920,182 @@
       "type": "stat"
     },
     {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 11,
+        "x": 0,
+        "y": 35
+      },
+      "id": 28,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "AsG0gLo7k"
+          },
+          "exemplar": true,
+          "expr": "clamp_min(delta(eligible_plots[1h]), 0) / total_plots",
+          "interval": "",
+          "legendFormat": "{{host}}",
+          "refId": "A"
+        }
+      ],
+      "title": "单个Plot 每小时 初筛通过数",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 11,
+        "x": 11,
+        "y": 35
+      },
+      "id": 37,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "AsG0gLo7k"
+          },
+          "exemplar": true,
+          "expr": "clamp_min(delta(eligible_plots[1h]), 0)  *1024*1024*1024*1024 / on(host)  label_replace(plot_size, \"host\", \"$1\", \"ip\", \"(.*)\")",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{host}}",
+          "refId": "C"
+        }
+      ],
+      "title": "每TB 每小时 初筛通过数",
+      "type": "timeseries"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 10,
         "w": 11,
         "x": 0,
-        "y": 24
+        "y": 42
       },
       "hiddenSeries": false,
       "id": 4,
@@ -987,7 +1115,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1005,9 +1133,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "查询挑战数量 (5分钟平均)",
       "tooltip": {
         "shared": true,
@@ -1016,33 +1142,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -1050,18 +1167,13 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 10,
-        "w": 12,
+        "w": 11,
         "x": 11,
-        "y": 24
+        "y": 42
       },
       "hiddenSeries": false,
       "id": 8,
@@ -1081,7 +1193,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.3.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1107,9 +1219,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "挑战查询时间",
       "tooltip": {
         "shared": true,
@@ -1118,92 +1228,39 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 27,
+  "schemaVersion": 34,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "K32",
-          "value": "101"
-        },
-        "description": "",
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "单个Plot大小（GB）",
-        "multi": false,
-        "name": "plot_size",
-        "options": [
-          {
-            "selected": true,
-            "text": "K32",
-            "value": "101"
-          },
-          {
-            "selected": false,
-            "text": "K33",
-            "value": "209"
-          },
-          {
-            "selected": false,
-            "text": "K34",
-            "value": "430"
-          },
-          {
-            "selected": false,
-            "text": "K35",
-            "value": "884"
-          }
-        ],
-        "query": "K32 : 101,K33 : 209,K34 : 430,K35 : 884",
-        "queryValue": "",
-        "skipUrlSync": false,
-        "type": "custom"
-      },
-      {
-        "allValue": null,
         "current": {
           "selected": false,
           "text": "Eib",
           "value": "1048576"
         },
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "全网算力单位",
@@ -1222,18 +1279,53 @@
           }
         ],
         "query": "Pib : 1024, Eib : 1048576",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "Pib",
+          "value": "1024"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "个人算力单位",
+        "multi": false,
+        "name": "personal_space_unit",
+        "options": [
+          {
+            "selected": false,
+            "text": "Tib",
+            "value": "1"
+          },
+          {
+            "selected": true,
+            "text": "Pib",
+            "value": "1024"
+          },
+          {
+            "selected": false,
+            "text": "Eib",
+            "value": "1048576"
+          }
+        ],
+        "query": "Tib : 1,Pib : 1024, Eib : 1048576",
+        "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
       }
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Chia",
+  "title": "Chia1",
   "uid": "Chia",
-  "version": 7
+  "version": 9,
+  "weekStart": ""
 }
